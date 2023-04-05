@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textStyle="bold"
+            android:background="@color/color_black"
+            android:gravity="center"
+            android:text="@string/depStTextTitle"
+            android:textColor="@color/color_yellow"
+            android:textSize="30sp"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/depStTextView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/color_yellow"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/depStText"
+            android:textStyle="bold"
+            android:textColor="@color/color_black"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:autoSizeMaxTextSize="100dp"
+            app:autoSizeMinTextSize="20dp"
+            app:autoSizeTextType="uniform"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/depStIdTextView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/color_yellow"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/depStIdText"
+            android:textStyle="bold"
+            android:textColor="@color/color_black"
+            app:autoSizeMaxTextSize="100dp"
+            app:autoSizeMinTextSize="20dp"
+            app:autoSizeTextType="uniform"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/color_black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/rideBusTextTitle"
+            android:textColor="@color/color_yellow"
+            android:textSize="30sp"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/rideBusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/color_yellow"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:text="@string/rideBusText"
+            android:textColor="@color/color_black"
+            app:autoSizeMaxTextSize="100dp"
+            app:autoSizeMinTextSize="20dp"
+            app:autoSizeTextType="uniform"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/color_black"
+            android:gravity="center"
+            android:text="@string/arrBusTextTitle"
+            android:textStyle="bold"
+            android:textColor="@color/color_yellow"
+            android:textSize="30sp"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/arrStTextView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/color_yellow"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/arrStText"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/color_black"
+            app:autoSizeMaxTextSize="100dp"
+            app:autoSizeMinTextSize="20dp"
+            app:autoSizeTextType="uniform"
+            android:fontFamily="@font/font"
+            />
+
+        <TextView
+            android:id="@+id/arrStIdTextView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/color_yellow"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/arrStIdText"
+            android:textStyle="bold"
+            android:textColor="@color/color_black"
+            app:autoSizeMaxTextSize="100dp"
+            app:autoSizeMinTextSize="20dp"
+            app:autoSizeTextType="uniform"
+            android:fontFamily="@font/font"
+            />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_black">
+
+        <Button
+            android:id="@+id/STTButton"
+            android:contentDescription="@string/sttButton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/sttbutton"
+            android:scaleType="fitCenter" />
+
+    </FrameLayout>
+
+
+
+
+
+</LinearLayout>

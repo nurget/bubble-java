@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Android-Bus-App</string>
+
+    <string name="depStTextTitle">출발 정류장</string>
+    <string name="rideBusTextTitle">탑승 버스 정보</string>
+    <string name="arrBusTextTitle">도착 정류장</string>
+    <string name="depStText"> </string>
+    <string name="rideBusText"> </string>
+    <string name="arrStText"> </string>
+    <string name="depStIdText"> </string>
+    <string name="arrStIdText"> </string>
+    <string name="sttButton">음성인식</string>
+</resources>
