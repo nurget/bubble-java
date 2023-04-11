@@ -20,9 +20,9 @@ public class GetPrevStId {
     // @param stId : 현재 정류소 아이디
     // @return 이전 정류소의 아이디
     public String get(String busRouteId, String stId) {
-        String url = "http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute" +
-                "?ServiceKey=" + key +
-                "&busRouteId=" + busRouteId;
+        String url = "http://apis.data.go.kr/6410000/busrouteservice/getBusRouteStationList" +
+                "?serviceKey=" + key +
+                "&routeId=" + busRouteId;
         String prevStId = "";       // 리턴값
         int preIndex;                     // 이전 정류소 인덱스
         try {
