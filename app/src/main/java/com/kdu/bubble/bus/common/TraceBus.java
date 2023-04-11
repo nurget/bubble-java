@@ -48,7 +48,7 @@ public class TraceBus {
     // @flag = 2 탑승 중인 버스인 경우
     public void tracing(String prevStId, String vehId, int flag) {
 
-        url = "http://ws.bus.go.kr/api/rest/buspos/getBusPosByVehId" +
+        url = "http://openapi.gbis.go.kr/ws/rest/buslocationservice" +
                 "?ServiceKey=" + key +
                 "&vehId=" + vehId;
         this.vehId = vehId;

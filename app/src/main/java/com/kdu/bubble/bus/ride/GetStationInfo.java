@@ -48,10 +48,10 @@ public class GetStationInfo {
     // @return List(1) : 정류소 이름
     // @return List(2) : 정류소 고유번호
     public ArrayList<String> getApiData(String tmX, String tmY, String radius) {
-        String url = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos" +
-                "?ServiceKey=" + key +
-                "&tmX=" + tmX +
-                "&tmY=" + tmY +
+        String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationAroundList" +
+                "?serviceKey=" + key +
+                "&x=" + tmX +
+                "&y=" + tmY +
                 "&radius=" + radius;
         ArrayList<String> stInfo = new ArrayList<>();
         String stId = "";

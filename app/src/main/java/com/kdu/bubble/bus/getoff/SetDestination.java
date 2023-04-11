@@ -55,9 +55,9 @@ public class SetDestination {
         String tmpArs = "";
 
         // API URL 생성
-        final String url = "http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute" +
-                "?ServiceKey=" + key +
-                "&busRouteId=" + busRouteId;
+        final String url = "http://apis.data.go.kr/6410000/busrouteservice/getBusRouteStationList" +
+                "?serviceKey=" + key +
+                "&routeId=" + busRouteId;
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);

@@ -14,14 +14,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class ParsingXML {
 
-    DocumentBuilderFactory dbFactoty;
-    DocumentBuilder dBuilder;
-    Document doc;
-    String url;
+    private DocumentBuilderFactory dbFactory;
+    private DocumentBuilder dBuilder;
+    private Document doc;
+    private String url;
 
     public ParsingXML(String url) throws ParserConfigurationException, InterruptedException {
-        dbFactoty = DocumentBuilderFactory.newInstance();
-        dBuilder = dbFactoty.newDocumentBuilder();
+        dbFactory = DocumentBuilderFactory.newInstance();
+        dBuilder = dbFactory.newDocumentBuilder();
         this.url = url;
         System.out.println(url);
         getInetConnection thread = new getInetConnection(url);
@@ -32,7 +32,7 @@ public class ParsingXML {
     // @param tag : 파싱할 태그
     // @param index : 파싱할 리스트의 인덱스
     // @return : 파싱된 문자
-    public String parsing(String tag, int index) {
+    public synchronized String parsing(String tag, int index) {
         String s = "";
         NodeList nodeList = doc.getElementsByTagName("itemList");
 
@@ -46,7 +46,7 @@ public class ParsingXML {
     }
 
     // 리스트의 개수를 반환
-    public int getLength() {
+    public synchronized int getLength() {
         int len = 0;
         NodeList nodeList = doc.getElementsByTagName("itemList");
         len = nodeList.getLength();
@@ -58,7 +58,7 @@ public class ParsingXML {
     // @param tag : 인덱스를 찾을 value의 tag
     // @param value : 인덱스를 찾을 value
     // @return : 인덱스 값, 없다면 -1
-    public int index(String tag, String value) {
+    public synchronized int index(String tag, String value) {
         int indexNum = -1;
 
         for (int i = 0; i < getLength(); i++) {
@@ -84,9 +84,7 @@ public class ParsingXML {
         public void run() {
             try {
                 doc = dBuilder.parse(url);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
+            } catch (IOException | SAXException e) {
                 e.printStackTrace();
             }
         }

@@ -38,9 +38,9 @@ public class SetRideBus {
     // @return List(1) : 버스 노선 아이디
     public Boolean setBus(String arsId, String sttBus) {
 
-        String url = "http://ws.bus.go.kr/api/rest/stationinfo/getRouteByStation" +
-                "?ServiceKey=" + key +
-                "&arsId=" + arsId;
+        String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationViaRouteList" +
+                "?serviceKey=" + key +
+                "&stationId=" + arsId;
 
         ArrayList<String> infoList = new ArrayList<>();
         String tmpNum = "";
@@ -88,9 +88,9 @@ public class SetRideBus {
     // @return 첫번째 도착예정인 차량 아이디
     public String setVehId(String stId, String busRouteId) {
 
-        String url = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll" +
-                "?ServiceKey=" + key +
-                "&busRouteId=" + busRouteId;
+        String url = "http://apis.data.go.kr/6410000/busarrivalservice/getBusArrivalList" +
+                "?serviceKey=" + key +
+                "&stationId=" + busRouteId;
         String vehId = "";
 
         try {
