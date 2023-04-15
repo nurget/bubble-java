@@ -27,8 +27,8 @@ public class GetPrevStId {
         int preIndex;                     // 이전 정류소 인덱스
         try {
             ParsingXML parsingXML = new ParsingXML(url);
-            preIndex = parsingXML.index("station", stId) - 1;
-            prevStId = parsingXML.parsing("station", preIndex);
+            preIndex = parsingXML.index("stationId", stId) - 1;
+            prevStId = parsingXML.parsing("stationId", preIndex);
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();
         }

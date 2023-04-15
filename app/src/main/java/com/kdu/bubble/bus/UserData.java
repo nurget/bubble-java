@@ -21,10 +21,10 @@ public class UserData {
         startStation.id="";
         startStation.arsId = "";
         startStation.prevId = "";
-        this. desStation.arsId="";
+        this.desStation.arsId="";
         this.desStation.id="";
         this.desStation.arsId = "";
-        this. desStation.prevId = "";
+        this.desStation.prevId = "";
 
     }
     public void setStartStation(String id, String name, String arsId) {

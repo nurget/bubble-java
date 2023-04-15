@@ -34,7 +34,7 @@ public class ParsingXML {
     // @return : 파싱된 문자
     public synchronized String parsing(String tag, int index) {
         String s = "";
-        NodeList nodeList = doc.getElementsByTagName("itemList");
+        NodeList nodeList = doc.getElementsByTagName("msgBody");
 
         Node node = nodeList.item(index);
         Element fstElmnt = (Element) node;

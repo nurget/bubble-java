@@ -50,10 +50,10 @@ public class SetRideBus {
         try {
             ParsingXML parsingXML = new ParsingXML(url);
             for (int i = 0; i < parsingXML.getLength(); i++) {
-                if (parsingXML.parsing("busRouteNm", i).equals(sttBus)) {
-                    tmpNum = parsingXML.parsing("busRouteNm", i);
-                    tmpRouteId = parsingXML.parsing("busRouteId", i);
-                    tmpRouteType = parsingXML.parsing("busRouteType", i);
+                if (parsingXML.parsing("routeName", i).equals(sttBus)) {
+                    tmpNum = parsingXML.parsing("routeName", i);
+                    tmpRouteId = parsingXML.parsing("routeId", i);
+                    tmpRouteType = parsingXML.parsing("routeTypeCd", i);
                 }
             }
 
@@ -96,8 +96,8 @@ public class SetRideBus {
         try {
             ParsingXML parsingXML = new ParsingXML(url);
             for (int i = 0; i < parsingXML.getLength(); i++) {
-                if (parsingXML.parsing("stId", i).equals(stId)) {
-                    vehId = parsingXML.parsing("vehId1", i);
+                if (parsingXML.parsing("stationId", i).equals(stId)) {
+                    vehId = parsingXML.parsing("plateNo1", i);
                     break;
                 }
             }

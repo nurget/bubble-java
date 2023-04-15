@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private Button sttButton;
     private static Context context;
     private String key = "DehyBWi1YgSSR2wKJMIKUPjlAv09zlwMMw8%2BOZk0UC%2F52Tn7z2fSb3G%2BMA3T9c0UN0Xam2pXAbgVEHvOn9h63g%3D%3D";
-//    private String key = "8ca3ccf718b1496880e3f2ca72b2da65";
     public static UserData userData = new UserData();
     public static SetRideBus rideBus;
     public static SetDestination setDestination;

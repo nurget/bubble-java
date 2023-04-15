@@ -48,9 +48,9 @@ public class TraceBus {
     // @flag = 2 탑승 중인 버스인 경우
     public void tracing(String prevStId, String vehId, int flag) {
 
-        url = "http://openapi.gbis.go.kr/ws/rest/buslocationservice" +
+        url = "http://openapi.gbis.go.kr/ws/rest/buslocationservice/getBusLocationList" +
                 "?ServiceKey=" + key +
-                "&vehId=" + vehId;
+                "&routeId=" + vehId;
         this.vehId = vehId;
         checkBusLoc(url, prevStId, flag);
 
@@ -70,7 +70,7 @@ public class TraceBus {
                 try {
                     ParsingXML parsingXML = new ParsingXML(url);
                     String s = "";
-                    s = parsingXML.parsing("stId", 0);
+                    s = parsingXML.parsing("stationId", 0);
                     if (s.equals(stId)) {
                         Thread.sleep(20000);
                         URL url = new URL("https://cobitsa.herokuapp.com/bus/" + vehId);
@@ -117,8 +117,8 @@ public class TraceBus {
         int preIndex = -1;
         try {
             parsingXML = new ParsingXML(url);
-            preIndex = parsingXML.index("station", stId) - 1;
-            preStId = parsingXML.parsing("station", preIndex);
+            preIndex = parsingXML.index("stationId", stId) - 1;
+            preStId = parsingXML.parsing("stationId", preIndex);
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();
         }

@@ -36,13 +36,14 @@ public class GetStationInfo {
 
         if (stInfo == null)
             return false;
+        Log.d("stInfo : ", stInfo.toString());
         userData.setStartStation(stInfo.get(0), stInfo.get(1), stInfo.get(2));
         return true;
     }
 
     // 현재 위치를 기반으로 제일 가까운 정류소의 정보 리턴
-    // @param tmX : GPS X 좌표
-    // @param tmY : GPS Y 좌표
+    // @param x : GPS X 좌표
+    // @param y : GPS Y 좌표
     // @param radius : 반경(0~1500m)
     // @return List(0) : 정류소 아이디
     // @return List(1) : 정류소 이름
@@ -51,8 +52,7 @@ public class GetStationInfo {
         String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationAroundList" +
                 "?serviceKey=" + key +
                 "&x=" + tmX +
-                "&y=" + tmY +
-                "&radius=" + radius;
+                "&y=" + tmY;
         ArrayList<String> stInfo = new ArrayList<>();
         String stId = "";
         String stName = "";
@@ -60,30 +60,32 @@ public class GetStationInfo {
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);
+            Log.d("parsingResult : ", String.valueOf(parsingXML.getLength()));
+            Log.d("parsingResult : ", parsingXML.parsing("stationName", 0));
+            Log.d("parsingResult : ", parsingXML.parsing("stationId", 0));
+            Log.d("parsingResult : ", parsingXML.parsing("mobileNo", 0));
             if (parsingXML.getLength() == 1) {
+                Log.d("size : ", String.valueOf(parsingXML.getLength()));
                 stId = parsingXML.parsing("stationId", 0);
-                stName = parsingXML.parsing("stationNm", 0);
-                arsId = parsingXML.parsing("arsId", 0);
-            } else if (parsingXML.getLength() == 0)
+                stName = parsingXML.parsing("stationName", 0);
+                arsId = parsingXML.parsing("mobileNo", 0);
+            } else if (parsingXML.getLength() == 0) {
+                Log.d("null", "null");
                 return null;
+            }
             else {
-                // 기존 Logic
-//                int nextRadius = Integer.parseInt(radius) / 2;
-//                stInfo = getApiData(tmX, tmY, Integer.toString(nextRadius));
-//                return stInfo;
-
-                // 새로운 Logic
+                Log.d("else : ", "else");
                 ArrayList<ArrayList<Double>> stList = new ArrayList<>();
                 for(int i=0; i<parsingXML.getLength(); i++) {
                     ArrayList<Double> tmpUnit = new ArrayList<>();
-                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("gpsX", i)));
-                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("gpsY", i)));
+                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("x", i)));
+                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("y", i)));
                     stList.add(tmpUnit);
                 }
                 int index = findNearStation(stList, Double.parseDouble(tmX), Double.parseDouble(tmY));
                 stId = parsingXML.parsing("stationId", index);
-                stName = parsingXML.parsing("stationNm", index);
-                arsId = parsingXML.parsing("arsId", index);
+                stName = parsingXML.parsing("stationName", index);
+                arsId = parsingXML.parsing("mobileNo", index);
             }
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();

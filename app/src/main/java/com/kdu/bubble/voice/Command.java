@@ -106,16 +106,19 @@ public class Command {
                     tts.speech(this.args.get(0) + "번 버스가 오면 알려드릴게요");
                     busTextView.setText(this.args.get(0));
                     // 버스 색 지정
-                    // (1:공항, 2:마을, 3:간선, 4:지선, 5:순환, 6:광역, 7:인천, 8:경기, 9:폐지, 0:공용)
+                    // (11:직행좌석, 12:좌석, 13:일반, 14:광역급행, 15:따복형, 16:경기순환, 21:직행좌석농어촌, 22: 좌석농어촌)
+//                  // (23:일반농어촌, 30:마을, 41:고속시외, 42:좌석시외, 43:일반시외, 51:리무진공항, 52:좌석공항, 53:일반공항)
                     int routeType = Integer.parseInt(userData.ridingBus.routeType);
-                    if (routeType == 2 || routeType == 4) {
-                        busTextView.setBackgroundColor(Color.parseColor("#59B325"));
-                    } else if (routeType == 3) {
-                        busTextView.setBackgroundColor(Color.parseColor("#3B5AA7"));
-                    } else if (routeType == 5) {
-                        busTextView.setBackgroundColor(Color.parseColor("#E6A842"));
-                    } else if (routeType == 6) {
-                        busTextView.setBackgroundColor(Color.parseColor("#BE4531"));
+                    if (routeType == 11 || routeType == 16) {
+                        busTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+                    } else if (routeType == 12) {
+                        busTextView.setBackgroundColor(Color.parseColor("#0075C8"));
+                    } else if (routeType == 13) {
+                        busTextView.setBackgroundColor(Color.parseColor("#33CC99"));
+                    } else if (routeType == 15) {
+                        busTextView.setBackgroundColor(Color.parseColor("#B62367"));
+                    } else if (routeType == 30) {
+                        busTextView.setBackgroundColor(Color.parseColor("#F99D1C"));
                     } else {
                         busTextView.setBackgroundColor(Color.parseColor("#1C1C1C"));
                     }
