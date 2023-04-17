@@ -49,6 +49,7 @@ public class GetStationInfo {
     // @return List(1) : 정류소 이름
     // @return List(2) : 정류소 고유번호
     public ArrayList<String> getApiData(String tmX, String tmY, String radius) {
+        // String url = "http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos" +
         String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationAroundList" +
                 "?serviceKey=" + key +
                 "&x=" + tmX +
@@ -60,33 +61,33 @@ public class GetStationInfo {
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);
-            Log.d("parsingResult : ", String.valueOf(parsingXML.getLength()));
-            Log.d("parsingResult : ", parsingXML.parsing("stationName", 0));
-            Log.d("parsingResult : ", parsingXML.parsing("stationId", 0));
-            Log.d("parsingResult : ", parsingXML.parsing("mobileNo", 0));
-            if (parsingXML.getLength() == 1) {
-                Log.d("size : ", String.valueOf(parsingXML.getLength()));
-                stId = parsingXML.parsing("stationId", 0);
-                stName = parsingXML.parsing("stationName", 0);
-                arsId = parsingXML.parsing("mobileNo", 0);
-            } else if (parsingXML.getLength() == 0) {
+            int itemsNum = parsingXML.getLength("busStationAroundList");
+            Log.d("size : ", String.valueOf(itemsNum));
+            if ( itemsNum > 0 ) {
+                stId = parsingXML.parsing("busStationAroundList","stationId", 0);
+                stName = parsingXML.parsing("busStationAroundList","stationName", 0);
+                arsId = parsingXML.parsing("busStationAroundList","mobileNo", 0);
+                Log.d("ParsingResult : ", stId);
+                Log.d("parsingResult : ", stName);
+                Log.d("parsingResult : ", arsId);
+            } else { // if (parsingXML.getLength() == 0) {
                 Log.d("null", "null");
                 return null;
             }
-            else {
-                Log.d("else : ", "else");
-                ArrayList<ArrayList<Double>> stList = new ArrayList<>();
-                for(int i=0; i<parsingXML.getLength(); i++) {
-                    ArrayList<Double> tmpUnit = new ArrayList<>();
-                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("x", i)));
-                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("y", i)));
-                    stList.add(tmpUnit);
-                }
-                int index = findNearStation(stList, Double.parseDouble(tmX), Double.parseDouble(tmY));
-                stId = parsingXML.parsing("stationId", index);
-                stName = parsingXML.parsing("stationName", index);
-                arsId = parsingXML.parsing("mobileNo", index);
-            }
+//            else {
+//                Log.d("else : ", "else");
+//                ArrayList<ArrayList<Double>> stList = new ArrayList<>();
+//                for(int i=0; i<parsingXML.getLength(); i++) {
+//                    ArrayList<Double> tmpUnit = new ArrayList<>();
+//                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("x", i)));
+//                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("y", i)));
+//                    stList.add(tmpUnit);
+//                }
+//                int index = findNearStation(stList, Double.parseDouble(tmX), Double.parseDouble(tmY));
+//                stId = parsingXML.parsing("stationId", index);
+//                stName = parsingXML.parsing("stationName", index);
+//                arsId = parsingXML.parsing("mobileNo", index);
+//            }
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,7 +116,7 @@ public class GetStationInfo {
     }
 
     // 좌표 사이에 거리 계산
-    // @return : m단위 거리
+    // @return : m 단위 거리
     private double calDistance(double lat1, double lon1, double lat2, double lon2){
 
         double theta, dist;

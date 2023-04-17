@@ -1,5 +1,7 @@
 package com.kdu.bubble.bus.common;
 
+import android.util.Log;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +22,7 @@ public class ParsingXML {
     private String url;
 
     public ParsingXML(String url) throws ParserConfigurationException, InterruptedException {
+        Log.d("parsing_xml", "in");
         dbFactory = DocumentBuilderFactory.newInstance();
         dBuilder = dbFactory.newDocumentBuilder();
         this.url = url;
@@ -32,9 +35,9 @@ public class ParsingXML {
     // @param tag : 파싱할 태그
     // @param index : 파싱할 리스트의 인덱스
     // @return : 파싱된 문자
-    public synchronized String parsing(String tag, int index) {
+    public synchronized String parsing(String parentTag, String tag, int index) {
         String s = "";
-        NodeList nodeList = doc.getElementsByTagName("msgBody");
+        NodeList nodeList = doc.getElementsByTagName(parentTag); // "busStationAroundList"
 
         Node node = nodeList.item(index);
         Element fstElmnt = (Element) node;
@@ -46,9 +49,9 @@ public class ParsingXML {
     }
 
     // 리스트의 개수를 반환
-    public synchronized int getLength() {
+    public synchronized int getLength(String parentTag) {
         int len = 0;
-        NodeList nodeList = doc.getElementsByTagName("itemList");
+        NodeList nodeList = doc.getElementsByTagName(parentTag); // "busStationAroundList"
         len = nodeList.getLength();
 
         return len;
@@ -58,11 +61,11 @@ public class ParsingXML {
     // @param tag : 인덱스를 찾을 value의 tag
     // @param value : 인덱스를 찾을 value
     // @return : 인덱스 값, 없다면 -1
-    public synchronized int index(String tag, String value) {
+    public synchronized int index(String tag, String parentTag, String value) {
         int indexNum = -1;
 
-        for (int i = 0; i < getLength(); i++) {
-            NodeList nodeList = doc.getElementsByTagName("itemList");
+        for (int i = 0; i < getLength(parentTag); i++) {
+            NodeList nodeList = doc.getElementsByTagName(parentTag);
             Node node = nodeList.item(i);
             Element fstElmnt = (Element) node;
             NodeList stIdNode = fstElmnt.getElementsByTagName(tag);

@@ -73,7 +73,7 @@ public class Command {
             tts.speech(split[0] + "번 버스가 맞습니까?");
             Thread.sleep(3000);
             commandFlag = 1;
-            //맞는지아닌지 확인
+            //맞는지 아닌지 확인
             this.cnt = 1;
             getCommand();
         } else if (verb.contains("내리")) {

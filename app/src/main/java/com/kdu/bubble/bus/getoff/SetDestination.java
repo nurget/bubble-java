@@ -61,10 +61,10 @@ public class SetDestination {
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);
-            for (int i = 0; i < parsingXML.getLength(); i++) {
-                tmpArs = parsingXML.parsing("mobileNo", i);
-                tmpId = parsingXML.parsing("stationId", i);
-                tmpName = parsingXML.parsing("stationName", i);
+            for (int i = 0; i < parsingXML.getLength("busRouteStationList"); i++) {
+                tmpArs = parsingXML.parsing("busRouteStationList", "mobileNo", i);
+                tmpId = parsingXML.parsing("busRouteStationList", "stationId", i);
+                tmpName = parsingXML.parsing("busRouteStationList", "stationName", i);
                 idList.add(tmpId);
                 nameList.add(tmpName);
                 arsIdList.add(tmpArs);
