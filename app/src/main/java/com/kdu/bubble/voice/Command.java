@@ -78,7 +78,7 @@ public class Command {
             getCommand();
         } else if (verb.contains("내리")) {
             // 내릴 정류장 지정
-            if (userData.ridingBus.vehId.equals("")) {
+            if (userData.ridingBus.routeId.equals("")) { //vehId
                 tts.speech("죄송해요. 지금 탑승하시고 계신 버스를 모르겠어요.");
                 return;
             }

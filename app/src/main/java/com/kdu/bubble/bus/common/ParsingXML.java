@@ -37,14 +37,18 @@ public class ParsingXML {
     // @return : 파싱된 문자
     public synchronized String parsing(String parentTag, String tag, int index) {
         String s = "";
-        NodeList nodeList = doc.getElementsByTagName(parentTag); // "busStationAroundList"
+        try {
+            NodeList nodeList = doc.getElementsByTagName(parentTag); // "busStationAroundList"
 
-        Node node = nodeList.item(index);
-        Element fstElmnt = (Element) node;
+            Node node = nodeList.item(index);
+            Element fstElmnt = (Element) node;
 
-        NodeList stIdNode = fstElmnt.getElementsByTagName(tag);
-        s = stIdNode.item(0).getChildNodes().item(0).getNodeValue();
-
+            NodeList stIdNode = fstElmnt.getElementsByTagName(tag);
+            s = stIdNode.item(0).getChildNodes().item(0).getNodeValue();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return s;
     }
 
@@ -61,7 +65,7 @@ public class ParsingXML {
     // @param tag : 인덱스를 찾을 value의 tag
     // @param value : 인덱스를 찾을 value
     // @return : 인덱스 값, 없다면 -1
-    public synchronized int index(String tag, String parentTag, String value) {
+    public synchronized int index(String parentTag, String tag, String value) {
         int indexNum = -1;
 
         for (int i = 0; i < getLength(parentTag); i++) {

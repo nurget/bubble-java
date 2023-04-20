@@ -15,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import static com.kdu.bubble.MainActivity.userData;
 
 import android.content.Context;
+import android.util.Log;
 
 public class SetRideBus {
 
@@ -32,15 +33,16 @@ public class SetRideBus {
     }
 
     // 탑승할 버스 정보를 List로 반환하는 메소드
-    // @param arsId : 현재 정류소의 고유번호
+    // @param stId : 현재 정류소의 고유번호
     // @param sttBus : STT로 받은 탑승하려는 버스 번호
     // @return List(0) : 버스 번호
     // @return List(1) : 버스 노선 아이디
-    public Boolean setBus(String arsId, String sttBus) {
-
+    public Boolean setBus(String stationId, String sttBus) {
         String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationViaRouteList" +
                 "?serviceKey=" + key +
-                "&stationId=" + arsId;
+                "&stationId=" + stationId; // 235001080
+
+
 
         ArrayList<String> infoList = new ArrayList<>();
         String tmpNum = "";
@@ -49,11 +51,12 @@ public class SetRideBus {
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);
-            for (int i = 0; i < parsingXML.getLength("busStationAroundList"); i++) {
-                if (parsingXML.parsing("busStationAroundList", "routeName", i).equals(sttBus)) {
-                    tmpNum = parsingXML.parsing("busStationAroundList", "routeName", i);
-                    tmpRouteId = parsingXML.parsing("busStationAroundList", "routeId", i);
-                    tmpRouteType = parsingXML.parsing("busStationAroundList", "routeTypeCd", i);
+            for (int i = 0; i < parsingXML.getLength("busRouteList"); i++) {
+                if (parsingXML.parsing("busRouteList", "routeName", i).equals(sttBus)) {
+                    tmpNum = parsingXML.parsing("busRouteList", "routeName", i);
+                    tmpRouteId = parsingXML.parsing("busRouteList", "routeId", i);
+                    tmpRouteType = parsingXML.parsing("busRouteList", "routeTypeCd", i);
+                    Log.d("busStationList", tmpNum);
                 }
             }
 
@@ -90,7 +93,7 @@ public class SetRideBus {
 
         String url = "http://apis.data.go.kr/6410000/busarrivalservice/getBusArrivalList" +
                 "?serviceKey=" + key +
-                "&stationId=" + busRouteId;
+                "&stationId=" + busRouteId; // 235000091
         String vehId = "";
 
         try {

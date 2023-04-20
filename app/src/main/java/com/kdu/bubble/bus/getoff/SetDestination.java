@@ -12,6 +12,7 @@ import static com.kdu.bubble.MainActivity.destStIdTextView;
 import static com.kdu.bubble.MainActivity.userData;
 
 import android.content.Context;
+import android.util.Log;
 
 public class SetDestination {
 
@@ -57,10 +58,12 @@ public class SetDestination {
         // API URL 생성
         final String url = "http://apis.data.go.kr/6410000/busrouteservice/getBusRouteStationList" +
                 "?serviceKey=" + key +
-                "&routeId=" + busRouteId;
+                "&routeId=" + busRouteId; // 235000091
 
         try {
             ParsingXML parsingXML = new ParsingXML(url);
+            int itemsNum = parsingXML.getLength("busRouteStationList");
+            Log.d("size : ", String.valueOf(itemsNum));
             for (int i = 0; i < parsingXML.getLength("busRouteStationList"); i++) {
                 tmpArs = parsingXML.parsing("busRouteStationList", "mobileNo", i);
                 tmpId = parsingXML.parsing("busRouteStationList", "stationId", i);
@@ -68,6 +71,10 @@ public class SetDestination {
                 idList.add(tmpId);
                 nameList.add(tmpName);
                 arsIdList.add(tmpArs);
+
+                Log.d("ParsingResult", tmpArs);
+                Log.d("ParsingResult", tmpId);
+                Log.d("ParsingResult", tmpName);
             }
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();

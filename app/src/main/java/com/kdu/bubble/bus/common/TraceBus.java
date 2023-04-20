@@ -48,6 +48,9 @@ public class TraceBus {
     // @flag = 2 탑승 중인 버스인 경우
     public void tracing(String prevStId, String vehId, int flag) {
 //  http://openapi.gbis.go.kr/ws/rest/buslocationservice/getBusLocationList
+
+//        vehId = "235000091"; // test
+
         url = "http://apis.data.go.kr/6410000/buslocationservice/getBusLocationList" +
                 "?ServiceKey=" + key +
                 "&routeId=" + vehId;
@@ -83,8 +86,21 @@ public class TraceBus {
                         if (flag == 1) {
                             tts.speech("버스가 이전 정류장을 출발했습니다. 탑승준비를 해주세요.");
                             conn.setRequestMethod("POST");
-                            startStTextView.startAnimation(anim);
-                            startStIdTextView.startAnimation(anim);
+                            try {
+//                                runOnUiThread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        // Stuff that updates the UI
+//                                        startStTextView.startAnimation(anim);
+//                                        startStIdTextView.startAnimation(anim);
+//                                    }
+//                                });
+                                startStTextView.startAnimation(anim);
+                                startStIdTextView.startAnimation(anim);
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         // 탑승 중인 버스가 이전 정류장 도착한 경우
                         else if (flag == 2) {

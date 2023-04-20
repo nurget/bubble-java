@@ -22,7 +22,7 @@ public class GetPrevStId {
     public String get(String busRouteId, String stId) {
         String url = "http://apis.data.go.kr/6410000/busrouteservice/getBusRouteStationList" +
                 "?serviceKey=" + key +
-                "&routeId=" + busRouteId;
+                "&routeId=" + busRouteId; // 235000091
         String prevStId = "";       // 리턴값
         int preIndex;                     // 이전 정류소 인덱스
         try {
