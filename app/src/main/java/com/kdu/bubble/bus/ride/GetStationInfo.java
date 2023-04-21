@@ -33,7 +33,6 @@ public class GetStationInfo {
 
         ArrayList<String> stInfo = this.getApiData(Double.toString(longitude),Double.toString(latitute),  Integer.toString(START_DISTANCE_FOR_GET_STATION));
 
-
         if (stInfo == null)
             return false;
         Log.d("stInfo : ", stInfo.toString());
@@ -48,7 +47,7 @@ public class GetStationInfo {
     // @return List(0) : 정류소 아이디
     // @return List(1) : 정류소 이름
     // @return List(2) : 정류소 고유번호
-    public ArrayList<String> getApiData(String tmX, String tmY, String radius) {
+    public ArrayList<String> getApiData(String tmX, String tmY, String raduis) {
         String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationAroundList" +
                 "?serviceKey=" + key +
                 "&x=" + tmX +
@@ -66,27 +65,11 @@ public class GetStationInfo {
                 stId = parsingXML.parsing("busStationAroundList","stationId", 0);
                 stName = parsingXML.parsing("busStationAroundList","stationName", 0);
                 arsId = parsingXML.parsing("busStationAroundList","mobileNo", 0);
-//                Log.d("ParsingResult : ", stId);
-//                Log.d("parsingResult : ", stName);
-//                Log.d("parsingResult : ", arsId);
-            } else { // if (parsingXML.getLength() == 0) {
+
+            } else {
                 Log.d("null", "null");
                 return null;
             }
-//            else {
-//                Log.d("else : ", "else");
-//                ArrayList<ArrayList<Double>> stList = new ArrayList<>();
-//                for(int i=0; i<parsingXML.getLength(); i++) {
-//                    ArrayList<Double> tmpUnit = new ArrayList<>();
-//                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("x", i)));
-//                    tmpUnit.add(Double.parseDouble(parsingXML.parsing("y", i)));
-//                    stList.add(tmpUnit);
-//                }
-//                int index = findNearStation(stList, Double.parseDouble(tmX), Double.parseDouble(tmY));
-//                stId = parsingXML.parsing("stationId", index);
-//                stName = parsingXML.parsing("stationName", index);
-//                arsId = parsingXML.parsing("mobileNo", index);
-//            }
         } catch (ParserConfigurationException | InterruptedException e) {
             e.printStackTrace();
         }

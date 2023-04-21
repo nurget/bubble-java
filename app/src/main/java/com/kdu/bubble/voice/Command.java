@@ -11,9 +11,11 @@ import static com.kdu.bubble.MainActivity.userData;
 import android.app.Activity;
 import android.graphics.Color;
 
+import com.kdu.bubble.bus.UserData;
 import com.kdu.bubble.bus.ride.GetStationInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
@@ -93,16 +95,18 @@ public class Command {
         } else if (analyzeResult.getMorphesByTags("NP").contains("여기")) {
             // 현재 정류장 확인
             if (getStationInfo.checkWhereAmI(mainActivity)) {
-                tts.speech("이곳은" + userData.startStation.name + "정류장입니다. 정류장번호는 " + userData.startStation.arsId + "입니다.");
+                String stKey = userData.startStation.arsId;
+                String[] sKeySplit = stKey.split(" ", stKey.length() + 1);
+                tts.speech("이곳은" + userData.startStation.name + "정류장입니다. 정류장번호는 " +  Arrays.toString(sKeySplit) + "입니다.");
                 startStTextView.setText(userData.startStation.name);
-                startStIdTextView.setText(userData.startStation.arsId);
+                startStIdTextView.setText(stKey);
             } else
                 tts.speech("이곳은 정류장이 아닙니다.");
 
         } else if (command.contains("그래") || command.contains("어") || command.contains("네") || command.contains("응") || command.contains("맞아")) {
             if (commandFlag == 1) {
                 // 탑승지정 명령 실행
-                if (rideBus.setBus(userData.startStation.arsId, this.args.get(0))) {
+                if (rideBus.setBus(userData.startStation.id, this.args.get(0))) {
                     tts.speech(this.args.get(0) + "번 버스가 오면 알려드릴게요");
                     busTextView.setText(this.args.get(0));
                     // 버스 색 지정
