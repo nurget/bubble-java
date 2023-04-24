@@ -38,7 +38,7 @@ public class ParsingXML {
     public synchronized String parsing(String parentTag, String tag, int index) {
         String s = "";
         try {
-            NodeList nodeList = doc.getElementsByTagName(parentTag); // "busStationAroundList"
+            NodeList nodeList = doc.getElementsByTagName(parentTag);
 
             Node node = nodeList.item(index);
             Element fstElmnt = (Element) node;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android-Bus-App</string>
+    <string name="app_name">버블</string>
 
     <string name="depStTextTitle">출발 정류장</string>
     <string name="rideBusTextTitle">탑승 버스 정보</string>

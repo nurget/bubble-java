@@ -96,7 +96,7 @@ public class Command {
             // 현재 정류장 확인
             if (getStationInfo.checkWhereAmI(mainActivity)) {
                 String stKey = userData.startStation.arsId;
-                String[] sKeySplit = stKey.split(" ", stKey.length() + 1);
+                String[] sKeySplit = stKey.split("", stKey.length() + 1);
                 tts.speech("이곳은" + userData.startStation.name + "정류장입니다. 정류장번호는 " +  Arrays.toString(sKeySplit) + "입니다.");
                 startStTextView.setText(userData.startStation.name);
                 startStIdTextView.setText(stKey);
