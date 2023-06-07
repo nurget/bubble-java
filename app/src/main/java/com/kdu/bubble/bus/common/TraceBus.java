@@ -12,6 +12,7 @@ import static com.kdu.bubble.MainActivity.vibrator;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 import com.kdu.bubble.R;
 import com.kdu.bubble.voice.TTS;
@@ -31,7 +32,7 @@ public class TraceBus {
 
     String key;         // 서비스 키
     String url;
-    String vehId;
+    String routeId; //vehId
 
     ParsingXML parsingXML;
 
@@ -42,19 +43,18 @@ public class TraceBus {
         this.key = key;
     }
 
-    // API Url 생성후 스케쥴러 메소드로 넘겨주는 함수
+    // API URL 생성 후 스케줄러 메소드로 넘겨주는 함수
     // @param 정류소 ID, 차량 ID, 탑승예정 or 탑승 중 플레그
     // @flag = 1 탑승 예정 버스인 경우
     // @flag = 2 탑승 중인 버스인 경우
-    public void tracing(String prevStId, String vehId, int flag) {
+    public void tracing(String prevStId, String routeId, int flag) {
 //  http://openapi.gbis.go.kr/ws/rest/buslocationservice/getBusLocationList
 
-//        vehId = "235000091"; // test
 
         url = "http://apis.data.go.kr/6410000/buslocationservice/getBusLocationList" +
                 "?ServiceKey=" + key +
-                "&routeId=" + vehId;
-        this.vehId = vehId;
+                "&routeId=" + routeId; // 235000091
+        this.routeId = routeId;
         checkBusLoc(url, prevStId, flag);
 
 
@@ -76,7 +76,7 @@ public class TraceBus {
                     s = parsingXML.parsing("busLocationList", "stationId", 0);
                     if (s.equals(stId)) {
                         Thread.sleep(20000);
-                        URL url = new URL("https://cobitsa.herokuapp.com/bus/" + vehId);
+                        URL url = new URL("http://localhost:8080/bus/" + routeId);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         // 음성, 진동 알림
                         MediaPlayer mediaPlayer = MediaPlayer.create(getAppContext(), R.raw.sound_dingdong);
@@ -95,6 +95,8 @@ public class TraceBus {
 //                                        startStIdTextView.startAnimation(anim);
 //                                    }
 //                                });
+                                Log.d("TraceBus", "Checking bus location...");
+
                                 startStTextView.startAnimation(anim);
                                 startStIdTextView.startAnimation(anim);
                             }

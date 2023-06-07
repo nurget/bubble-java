@@ -40,9 +40,7 @@ public class SetRideBus {
     public Boolean setBus(String stationId, String sttBus) {
         String url = "http://apis.data.go.kr/6410000/busstationservice/getBusStationViaRouteList" +
                 "?serviceKey=" + key +
-                "&stationId=" + stationId; // 235001080
-
-
+                "&stationId=" + stationId;
 
         ArrayList<String> infoList = new ArrayList<>();
         String tmpNum = "";
@@ -109,6 +107,6 @@ public class SetRideBus {
             e.printStackTrace();
         }
 
-        return vehId;
+        return busRouteId; //vehId
     }
 }

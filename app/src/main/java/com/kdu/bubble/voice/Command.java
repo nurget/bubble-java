@@ -90,7 +90,7 @@ public class Command {
             Thread.sleep(3000);
             commandFlag = 2;
             this.cnt = 1;
-            //맞는지 아닌지 확인
+            // 맞는지 아닌지 확인
             getCommand();
         } else if (analyzeResult.getMorphesByTags("NP").contains("여기")) {
             // 현재 정류장 확인
